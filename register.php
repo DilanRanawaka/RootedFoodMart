@@ -2,6 +2,40 @@
 <html>
 
 <head>
+<?php
+
+$FName = $_REQUEST['first_name'];
+$LName = $_REQUEST['last_name'];
+$NIC = $_REQUEST['nic'];
+$Pass = $_REQUEST['password'];
+$address = $_REQUEST['address'];
+$street=$_REQUEST['street'];
+$district=$_REQUEST['district'];
+$code = $_REQUEST['zip'];
+$province = $_REQUEST['Province'];
+$email = $_REQUEST['email'];
+$number = $_REQUEST['phone'];
+
+
+$link = mysqli_connect("localhost", "root", "","MartInfoDB");
+ 
+
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+
+$sql = "insert into registration (fname,lname,nic,pass,address,street,district,zip,province,email,pno) values ('$FName','$LName','$NIC','$Pass','$address','$street','$district','$code','$province','$email','$number')";
+if(mysqli_query($link, $sql))
+{
+    echo "<h1 align=center>Welcome ".$FName. " " .$LName." to Sea Side Park Hotels</h1><h2 align=center>Thank you for connecting with us</h2>
+    <form action=index.html><input type=submit value=ExploreMore></form>";
+} 
+else
+{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+?>
     <meta charset="utf-8">
     <title>Register</title>
     <!-- Mobile Specific Metas -->
