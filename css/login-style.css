@@ -97,7 +97,7 @@ textarea:focus, input:focus {
   border-color: transparent !important;
 }
 
-
+/* 
 input::-webkit-input-placeholder { color: #1b3815;}
 input:-moz-placeholder { color: #1b3815;}
 input::-moz-placeholder { color: #1b3815;}
@@ -106,7 +106,7 @@ input:-ms-input-placeholder { color: #1b3815;}
 textarea::-webkit-input-placeholder { color: #1b3815;}
 textarea:-moz-placeholder { color: #1b3815;}
 textarea::-moz-placeholder { color: #1b3815;}
-textarea:-ms-input-placeholder { color: #1b3815;}
+textarea:-ms-input-placeholder { color: #1b3815;} */
 
 /*---------------------------------------------*/
 button {
@@ -123,8 +123,7 @@ iframe {
 	border: none !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
+/*[ Utility ]*/
 .txt1 {
   font-family: Ubuntu-Regular;
   font-size: 15px;
@@ -148,8 +147,7 @@ iframe {
 }
 
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
+/*[ login ]*/
 
 .limiter {
   width: 100%;
@@ -185,8 +183,7 @@ iframe {
 }
 
 
-/*==================================================================
-[ Form ]*/
+/*[ Form ]*/
 
 .login100-form {
   width: 100%;
@@ -311,8 +308,7 @@ iframe {
 }
 
 
-/*------------------------------------------------------------------
-[ Alert validate ]*/
+/*[ Alert validate ]*/
 
 .validate-input {
   position: relative;
