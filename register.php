@@ -34,7 +34,7 @@ else
 {
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
-mysqli_close($conn);
+mysqli_close($link);
 
 ?>
     <meta charset="utf-8">
