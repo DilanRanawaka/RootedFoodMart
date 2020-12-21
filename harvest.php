@@ -194,12 +194,13 @@
                                     <input type="text" placeholder="Weight (kg)" id="weight"name="weight" />
                                 </div>
 
-
                                 <div class="form-group col-lg-12">
                                     <br>
-                                    <label for="exampleFormControlFile1">Upload Images</label>
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
-                                    <input type="submit" name="submit" value="Upload">
+                                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                                        Select image to upload:
+                                        <input type="file" name="fileToUpload" id="fileToUpload">
+                                        <input type="submit" value="Upload Image" name="submit">
+                                    </form> 
                                 </div>
 
                                 <!-- <div class="col-lg-12">
