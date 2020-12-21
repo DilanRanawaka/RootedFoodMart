@@ -2,32 +2,7 @@
 <html lang="en">
 
 <head>
-<?php
 
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "MartInfoDB";
-
-$conn = mysqli_connect($servername,$username,$password,$dbname);
-
-$nic=$_REQUEST['nic'];
-            $pass=$_REQUEST['pass'];
-            $query="select * from registration where nic='$nic' and pass='$pass'";
-    $rs=mysqli_query($conn,$query);
-    $rowcount = mysqli_num_rows($rs);
-	if($rowcount == 1)
-	{
-		echo "<h1 align=center>HEllo There WelCome to RootedFoodMart</h1>";
-	}
-	else
-	{
-		echo "<h1 align=center>Sorry! you are not a registered user. Please sign in</h1><br>";
-	}
-
-mysqli_close($conn);
-?>
     <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,6 +36,33 @@ mysqli_close($conn);
     <link rel="stylesheet" href="css/index-style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+    
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "MartInfoDB";
+
+$conn = mysqli_connect($servername,$username,$password,$dbname);
+if(isset($_REQUEST['submit'])){
+    
+    $nic=$_REQUEST['nic'];
+    $pass=$_REQUEST['pass'];
+    $query="select * from registration where nic='$nic' and pass='$pass'";
+    $rs=mysqli_query($conn,$query);
+    $rowcount = mysqli_num_rows($rs);
+    if($rowcount == 1)
+    {
+        header("location: index.php?user=$nic");
+    }
+    else
+    {
+        echo '<script type="text/javascript">alert("Please check your NIC & Password");</script>';
+    }
+}
+mysqli_close($conn);
+?>
 </head>
 
 <body>
