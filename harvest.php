@@ -40,40 +40,30 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
         $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
-        if(isset($_REQUEST['add'])){
-    
-            $ID = $_REQUEST['id'];
-            $nic = $_REQUEST['nic'];
-            $email = $_REQUEST['email'];
-            $name = $_REQUEST['name'];
-            $date = $_REQUEST['date'];
-            $type = $_REQUEST['type'];
-            $Hname = $_REQUEST['hname'];
-            $price = $_REQUEST['price'];
-            $weight = $_REQUEST['weight'];
-            $image = $_REQUEST['image'];
-    
+        $ID = $_REQUEST['id'];
             $status = ''; 
-    $status = 'error'; 
-    if(!empty($_FILES["file"]["name"])) { 
+            if(isset($_REQUEST["submit"])){ 
+                $status = 'error'; 
+
+    if(!(empty($_FILES["image"]["name"]))) { 
         // Get file info 
-        $fileName = basename($_FILES["file"]["name"]); 
-        $fileType = pathinfo($fileName, PATHINFO_FILENAME); 
+        $fileName = basename($_FILES["image"]["name"]); 
+        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
          
         // Allow certain file formats 
         $allowTypes = array('jpg','png','jpeg','gif'); 
         if(in_array($fileType, $allowTypes)){ 
-            $image = $_FILES['file']['tmp_name']; 
+            $image = $_FILES['image']['tmp_name']; 
             $imgContent = addslashes(file_get_contents($image)); 
          
             // Insert image content into database 
-            $insert = $db->query("insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,Images) VALUES ('$ID','$nic',$email','$name','$date','$type','$Hname',$price,'$weight',$imgContent')"); 
+            $insert = $db->query("insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')");
              
             if($insert){ 
                 $status = 'success'; 
-                echo '<script type="text/javascript">alert("Record uploaded successfully.");</script>';
+                echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
             }else{ 
-                echo '<script type="text/javascript">alert("Record upload failed, please try again.");</script>';
+                echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
             }  
             }
             else{ 
@@ -84,6 +74,36 @@
                 echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
                 } 
             } 
+        
+        if(isset($_REQUEST['add'])){
+
+            $nic = $_REQUEST['nic'];
+            $email = $_REQUEST['email'];
+            $name = $_REQUEST['name'];
+            $date = $_REQUEST['date'];
+            $type = $_REQUEST['type'];
+            $Hname = $_REQUEST['hname'];
+            $price = $_REQUEST['price'];
+            $weight = $_REQUEST['weight'];
+
+
+            $query="select * from registration where nic='$nic' and email='$email' and Fname='$name'";
+            $rs=mysqli_query($conn,$query);
+            $rowcount = mysqli_num_rows($rs);
+            if($rowcount == 1)
+            {
+                $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight')";
+            if(mysqli_query($conn, $sql))
+            {
+                echo '<script type="text/javascript">alert("Order placed successfully");</script>';
+            } 
+        }
+            else
+            {
+                echo '<script type="text/javascript">alert("Please check the data provided");</script>';
+            }
+        }
+    
             mysqli_close($conn);
             ?>
 
@@ -154,7 +174,7 @@
                                     <input type="text" placeholder="Email" id="email"name="email" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Name" id="name"name="name" />
+                                    <input type="text" placeholder="First Name" id="name"name="name" />
                                 </div>
                                 <div class="col-lg-12">
                                     <br>
@@ -179,6 +199,7 @@
                                     <br>
                                     <label for="exampleFormControlFile1">Upload Images</label>
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                                    <input type="submit" name="submit" value="Upload">
                                 </div>
 
                                 <!-- <div class="col-lg-12">
