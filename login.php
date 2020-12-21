@@ -128,7 +128,7 @@ mysqli_close($conn);
                     </div>
 
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
+                        <button class="login100-form-btn" name="submit">
                             Sign in
                         </button>
                     </div>

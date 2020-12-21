@@ -1,15 +1,15 @@
 <!doctype html>
 <!-- <html class="no-js" lang="zxx"> -->
-<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Harvest</title>
+    <title>Contact</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="manifest" href="site.html">
-    <link rel="apple-touch-icon" href="icon.html">
+    <!-- <link rel="manifest" href="site.html"> -->
+    <!-- <link rel="apple-touch-icon" href="icon.html"> -->
     <!-- Place favicon.ico in the root directory -->
 
     <!-- bootstrap v4.0.0 -->
@@ -39,66 +39,24 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-        $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
-        if(isset($_REQUEST['add'])){
-    
-            $ID = $_REQUEST['id'];
-            $nic = $_REQUEST['nic'];
-            $email = $_REQUEST['email'];
-            $name = $_REQUEST['name'];
-            $date = $_REQUEST['date'];
-            $type = $_REQUEST['type'];
-            $Hname = $_REQUEST['hname'];
-            $price = $_REQUEST['price'];
-            $weight = $_REQUEST['weight'];
-            $image = $_REQUEST['image'];
-    
-            $status = ''; 
-    $status = 'error'; 
-    if(!empty($_FILES["file"]["name"])) { 
-        // Get file info 
-        $fileName = basename($_FILES["file"]["name"]); 
-        $fileType = pathinfo($fileName, PATHINFO_FILENAME); 
-         
-        // Allow certain file formats 
-        $allowTypes = array('jpg','png','jpeg','gif'); 
-        if(in_array($fileType, $allowTypes)){ 
-            $image = $_FILES['file']['tmp_name']; 
-            $imgContent = addslashes(file_get_contents($image)); 
-         
-            // Insert image content into database 
-            $insert = $db->query("insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,Images) VALUES ('$ID','$nic',$email','$name','$date','$type','$Hname',$price,'$weight',$imgContent')"); 
-             
-            if($insert){ 
-                $status = 'success'; 
-                echo '<script type="text/javascript">alert("Record uploaded successfully.");</script>';
-            }else{ 
-                echo '<script type="text/javascript">alert("Record upload failed, please try again.");</script>';
-            }  
-            }
-            else{ 
-                echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
-                } 
-            }
-            else{ 
-                echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
-                } 
-            } 
-            mysqli_close($conn);
-            ?>
-
+    ?>
 </head>
+
 <body>
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
 
     <!--header-area start-->
     <header class="header-area">
-        <!--header-->
+        <!--header-top-->
+        <!--header-bottom-->
         <div id="sticker" class="header-bottom">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-sm-2">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
+                            <a href="index.html">ROOTED FOOT MART</a>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -110,12 +68,16 @@
                                     <li><a href="#">Pages</a>
                                     </li>
                                     <li><a href="#">Services</a>
+
                                     </li>
                                     <li><a href="#">Gallery</a>
+
                                     </li>
                                     <li><a href="#">Blog</a>
+
                                     </li>
                                     <li><a href="#">Shop</a>
+
                                     </li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                 </ul>
@@ -128,82 +90,45 @@
     </header>
     <!--header-area end-->
 
-
+    <!--contact-area start-->
     <div class="contact-area mt-100 sm-mt-80">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8 sm-mt-75 ">
-                    <div class="section-title text-center">
-                        <h2>Harvest Information</h2>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
                 <div class="col-lg-8 col-md-8 sm-mt-75">
                     <div class="contact-form style-3">
-                        <form id="harvestform">
+                        <form id="contactForm" data-toggle="validator" method="POST" action="http://careeraid.net/html/garden-preview/assets/php/contact.php">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Harvest ID" id="harvestid" name="id" />
+                                    <input type="text" placeholder="Order ID" id="orderid" required data-error="NEW ERROR MESSAGE" />
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="NIC No" id="nic" name="nic" />
+                                    <input type="text" placeholder="Farmer's NIC No" id="nic" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Email" id="email"name="email" />
+                                    <input type="text" placeholder="Email" id="email" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Name" id="name"name="name" />
+                                    <input type="text" placeholder="Harvest Detail" id="subject" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <br>
-                                    <label for="exampleFormControlFile1"> Date of Harvest</label>
-                                    <input type="date" placeholder="Date" id="date" name="date"/>
-                                </div>
-                                <div class="col-lg-12">
-                                    <input type="text" placeholder="Harvest Type" id="harvesttype"name="type" />
-                                </div>
-                                <div class="col-lg-12">
-                                    <input type="text" placeholder="Name of harvest" id="harvestname" name="hname"/>
-                                </div>
-                                <div class="col-lg-12">
-                                    <input type="text" placeholder="Unit Price (Rs per kg)" id="unitprice" name="price"/>
-                                </div>
-                                <div class="col-lg-12">
-                                    <input type="text" placeholder="Weight (kg)" id="weight"name="weight" />
+                                    <textarea placeholder="Additional Information" id="message"></textarea>
                                 </div>
 
-
-                                <div class="form-group col-lg-12">
-                                    <br>
-                                    <label for="exampleFormControlFile1">Upload Images</label>
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
-                                </div>
-
-                                <!-- <div class="col-lg-12">
-                                    <textarea placeholder="Message" id="message"></textarea>
-                                </div> -->
-                                <div class="col-lg-4">
-                                    <button class="btn-common" id="add" name="add">ADD</button>
-                                </div>
-                                <div class="col-lg-4">
-                                    <button class="btn-common" id="update" name="update">UPDATE</button>
-                                </div>
-                                <div class="col-lg-4">
-                                    <button class="btn-common" id="clear" name="delete">DELETE</button>
-                                </div>
-                                <!-- <div class="col-lg-8 text-left pt-30">
+                                <div class="col-lg-8 text-left pt-30">
                                     <div id="msgSubmit" class="hidden"></div>
-                                </div> -->
+                                </div>
                             </div>
                         </form>
+                        <div class="col-lg-4">
+                            <button class="btn-common" id="form-submit">Order</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--contact-area end-->
 
     <!--footer-area start-->
     <footer class="footer-area">
@@ -248,7 +173,6 @@
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer-widget style-2">
-
                             <div class="social-icons style-3 mt-35">
                                 <p>Follow us on</p>
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -290,5 +214,5 @@
     <script src="assets/js/plugins.js"></script>
     <!-- main js -->
     <script src="assets/js/main.js"></script>
+
 </body>
-</html>
