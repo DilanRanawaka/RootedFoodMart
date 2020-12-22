@@ -1,6 +1,5 @@
 <!doctype html>
 <!-- <html class="no-js" lang="zxx"> -->
-<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -39,42 +38,44 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-        $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
-        $ID = $_REQUEST['id'];
-            $status = ''; 
-            if(isset($_REQUEST["submit"])){ 
-                $status = 'error'; 
-
-    if(!(empty($_FILES["image"]["name"]))) { 
+       $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
+       $ID = rand(10000, 99999);
+    if(isset($_REQUEST['submit']))
+    { 
+        $status = 'error'; 
         // Get file info 
-        $fileName = basename($_FILES["image"]["name"]); 
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-         
-        // Allow certain file formats 
-        $allowTypes = array('jpg','png','jpeg','gif'); 
-        if(in_array($fileType, $allowTypes)){ 
-            $image = $_FILES['image']['tmp_name']; 
-            $imgContent = addslashes(file_get_contents($image)); 
-         
-            // Insert image content into database 
-            $insert = $db->query("insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')");
-             
-            if($insert){ 
-                $status = 'success'; 
-                echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
-            }else{ 
-                echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
-            }  
-            }
-            else{ 
-                echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
+            $fileName = basename($_FILES["fileToUpload"]["name"]); 
+            $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION)); 
+                if(!empty($_FILES["fileToUpload"]["name"]))
+                {
+                    // Allow certain file formats 
+                     $allowTypes = array('jpg','png','jpeg','gif'); 
+                        if(in_array($fileType, $allowTypes))
+                        { 
+                            $image = $_FILES['fileToUpload']['tmp_name']; 
+                            $imgContent = addslashes(file_get_contents($image)); 
+
+                            // Insert image content into database 
+                            $query="insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')";
+                             $rs=mysqli_query($conn,$query);
+
+                                     if($rs)
+                                    { 
+                                            $status = 'success'; 
+                                            echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
+                                    }
+                                    else{ 
+                                            echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
+                                    }  
+                        }
+                        else{ 
+                            echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
+                        } 
+                }
+                else{ 
+                     echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
                 } 
-            }
-            else{ 
-                echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
-                } 
-            } 
-        
+    }
         if(isset($_REQUEST['add'])){
 
             $nic = $_REQUEST['nic'];
@@ -102,10 +103,9 @@
             {
                 echo '<script type="text/javascript">alert("Please check the data provided");</script>';
             }
-        }
-    
-            mysqli_close($conn);
-            ?>
+}
+    mysqli_close($conn);
+?>
 
 </head>
 <body>
@@ -165,9 +165,6 @@
                         <form id="harvestform">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Harvest ID" id="harvestid" name="id" />
-                                </div>
-                                <div class="col-lg-6">
                                     <input type="text" placeholder="NIC No" id="nic" name="nic" />
                                 </div>
                                 <div class="col-lg-12">
@@ -196,9 +193,9 @@
 
                                 <div class="form-group col-lg-12">
                                     <br>
-                                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                                        Select image to upload:
-                                        <input type="file" name="fileToUpload" id="fileToUpload">
+                                    <form method="post" enctype="multipart/form-data">
+                                    Select image to upload:
+                                        <input type="file" name="fileToUpload">
                                         <input type="submit" value="Upload Image" name="submit">
                                     </form> 
                                 </div>
