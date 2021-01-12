@@ -12,7 +12,7 @@ if(isset($_GET['confirm_location'])) {
 
 
 function add_location(){
-    $con=mysqli_connect ("localhost", 'root', '','demo');
+    $con=mysqli_connect ("localhost", 'root', '','martinfodb');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
     }
@@ -34,14 +34,14 @@ function add_location(){
     }
 }
 function confirm_location(){
-    $con=mysqli_connect ("localhost", 'root', '','demo');
+    $con=mysqli_connect ("localhost", 'root', '','martinfodb');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
     }
     $id =$_GET['id'];
     $confirmed =$_GET['confirmed'];
     // update location with confirm if admin confirm.
-    $query = "update locations set location_status = $confirmed WHERE id = $id ";
+    $query = "update locations set locationStatus = $confirmed WHERE id = $id ";
     $result = mysqli_query($con,$query);
     echo "Inserted Successfully";
     if (!$result) {
@@ -49,13 +49,13 @@ function confirm_location(){
     }
 }
 function get_confirmed_locations(){
-    $con=mysqli_connect ("localhost", 'root', '','demo');
+    $con=mysqli_connect ("localhost", 'root', '','martinfodb');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
     }
     // update location with location_status if admin location_status.
     $sqldata = mysqli_query($con,"
-select id ,lat,lng,description,location_status as isconfirmed
+select id ,lat,lng,description,locationStatus as isconfirmed
 from locations WHERE  location_status = 1
   ");
 
@@ -75,13 +75,13 @@ from locations WHERE  location_status = 1
     }
 }
 function get_all_locations(){
-    $con=mysqli_connect ("localhost", 'root', '','demo');
+    $con=mysqli_connect ("localhost", 'root', '','martinfodb');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
     }
     // update location with location_status if admin location_status.
     $sqldata = mysqli_query($con,"
-select id ,lat,lng,description,location_status as isconfirmed
+select id ,lat,lng,description,locationStatus as isconfirmed
 from locations
   ");
 
