@@ -38,40 +38,38 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-    $link = mysqli_connect("localhost", "root", "","MartInfoDB");
+    $link = mysqli_connect("localhost", "root", "", "MartInfoDB");
 
-    if(isset($_REQUEST['register'])){
+    if (isset($_REQUEST['register'])) {
         $FName = $_REQUEST['first_name'];
         $LName = $_REQUEST['last_name'];
         $NIC = $_REQUEST['nic'];
         $Pass = $_REQUEST['password'];
-        $conpass=$_REQUEST['confirmpassword'];
+        $conpass = $_REQUEST['confirmpassword'];
         $address = $_REQUEST['address'];
-        $street=$_REQUEST['street'];
-        $district=$_REQUEST['district'];
+        $street = $_REQUEST['street'];
+        $district = $_REQUEST['district'];
         $code = $_REQUEST['zip'];
         $province = $_REQUEST['Province'];
         $email = $_REQUEST['email'];
         $number = $_REQUEST['phone'];
 
-    if($Pass==$conpass){
-        $query ="insert into registration (fname,lname,nic,pass,address,street,district,zip,province,email,pno) values ('$FName','$LName','$NIC','$Pass','$address','$street','$district','$code','$province','$email','$number')";
-        $result = mysqli_query($link,$query);
+        if ($Pass == $conpass) {
+            $query = "insert into registration (fname,lname,nic,pass,address,street,district,zip,province,email,pno) values ('$FName','$LName','$NIC','$Pass','$address','$street','$district','$code','$province','$email','$number')";
+            $result = mysqli_query($link, $query);
 
-        if(!($result==NULL)){
-            echo '<script type="text/javascript>alert("Registration is successful. Please log in.");</script>';
-            header("location: login.php");
+            if (!($result == NULL)) {
+                echo '<script type="text/javascript>alert("Registration is successful. Please log in.");</script>';
+                header("location: login.php");
+            } else {
+                echo '<script type="text/javascript">alert("Registration is unsuccessful.");</script>';
+            }
+        } else {
+            echo '<script type="text/javascript">alert("Passowrds do not match, Please check your password again");</script>';
         }
-        else{
-            echo '<script type="text/javascript">alert("Registration is unsuccessful.");</script>';
-        }
-    } 
-    else{
-        echo '<script type="text/javascript">alert("Passowrds do not match, Please check your password again");</script>';
-    }  
-}
-mysqli_close($link);
-?>
+    }
+    mysqli_close($link);
+    ?>
 </head>
 
 <header class="header-area">
@@ -92,7 +90,7 @@ mysqli_close($link);
             <div class="row align-items-center">
                 <div class="col-sm-2">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
+                        <h4><a href="index.html">ROOTED FOOT MART</a></h4>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -101,83 +99,26 @@ mysqli_close($link);
                             <ul>
                                 <li><a href="index.html">Home</a>
                                 </li>
-                                <li><a href="#">Pages</a>
-                                    <!-- <ul class="submenu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul> -->
+                                <li><a href="index.html">Home</a>
                                 </li>
-                                <li><a href="#">Services</a>
-                                    <!-- <ul class="submenu">
-                                        <li><a href="service-1.html">Service 1</a></li>
-                                        <li><a href="service-2.html">Service 2</a></li>
-                                        <li><a href="service-3.html">Service 3</a></li>
-                                    </ul> -->
+                                <li><a href="location.html">Mart</a>
                                 </li>
-                                <li><a href="#">Gallery</a>
-                                    <!-- <ul class="submenu">
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="gallery-details.html">Gallery Details</a></li>
-                                    </ul> -->
+                                <li><a href="harvest.html">Harvest</a>
                                 </li>
-                                <li><a href="#">Blog</a>
-                                    <!-- <ul class="submenu">
-                                        <li><a href="blog-1.html">Blog One</a></li>
-                                        <li><a href="blog-2.html">Blog Two</a></li>
-                                        <li><a href="blog-3.html">Blog Three</a></li>
-                                        <li><a href="blog-4.html">Blog Four</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul> -->
+                                <li><a href="contact.html">Place Order</a>
                                 </li>
-                                <li><a href="#">Shop</a>
-                                    <!-- <ul class="mega-menu"> -->
-                                    <!-- <li class="megamenu-single"> -->
-                                    <!-- <span class="mega-menu-title">Shop Page</span> -->
-                                    <!-- <ul>
-                                                <li><a href="shop.html">Shop Sidebar</a></li>
-                                                <li><a href="shop-full-width.html">Shop Fullwidth</a></li>
-                                                <li><a href="shop-filter.html">Shop Filter</a></li>
-                                                <li><a href="product-details.html">Product Details</a></li>
-                                            </ul> -->
-                                    <!-- </li> -->
-                                    <!-- <li class="megamenu-single"> -->
-                                    <!-- <span class="mega-menu-title">Featured</span> -->
-                                    <!-- <ul>
-                                                <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                                <li><a href="checkout.html">Check Out</a></li>
-                                                <li><a href="order-complete.html">Complete</a></li>
-                                            </ul> -->
-                                    <!-- </li> -->
-                                    <!-- <li class="megamenu-single">
-                                            <img src="assets/images/ad/3.jpg" alt="" />
-                                        </li> -->
-                                    <!-- </ul> -->
+                                <li><a href="graphs.html">Insights</a>
                                 </li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="#">Srvices</a>
+                                </li>
+                                <li><a href="">Contact Us</a>
+                                </li>
+                                <li><a href="login.html">Sign In</a>
+                                </li>
+                                <li><a href="register.html">Sign Up</a>
+                                </li>
                             </ul>
                         </nav>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="search-and-cart">
-                        <!--                         
-                        <div class="cart-link">
-                            <a href="javascript:void(0);">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>2</span>
-                            </a>
-                            <ul class="list-none cart-dropdown">
-                                <li>
-                                    <div class="mini-cart-total">
-                                        <h5>Total: $280.00</h5>
-                                    </div>
-                                    <div class="mini-cart-checkout">
-                                        <a href="checkout.html">Checkout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> -->
                     </div>
                 </div>
             </div>

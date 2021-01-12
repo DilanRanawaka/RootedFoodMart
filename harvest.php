@@ -1,5 +1,6 @@
 <!doctype html>
 <!-- <html class="no-js" lang="zxx"> -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -38,76 +39,66 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-       $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
-       $ID = rand(10000, 99999);
-    if(isset($_REQUEST['submit']))
-    { 
-        $status = 'error'; 
+    $conn = mysqli_connect("localhost", "root", "", "MartInfoDB");
+    $ID = rand(10000, 99999);
+    if (isset($_REQUEST['submit'])) {
+        $status = 'error';
         // Get file info 
-            $fileName = basename($_FILES["fileToUpload"]["name"]); 
-            $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION)); 
-                if(!empty($_FILES["fileToUpload"]["name"]))
-                {
-                    // Allow certain file formats 
-                     $allowTypes = array('jpg','png','jpeg','gif'); 
-                        if(in_array($fileType, $allowTypes))
-                        { 
-                            $image = $_FILES['fileToUpload']['tmp_name']; 
-                            $imgContent = addslashes(file_get_contents($image)); 
+        $fileName = basename($_FILES["fileToUpload"]["name"]);
+        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        if (!empty($_FILES["fileToUpload"]["name"])) {
+            // Allow certain file formats 
+            $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
+            if (in_array($fileType, $allowTypes)) {
+                $image = $_FILES['fileToUpload']['tmp_name'];
+                $imgContent = addslashes(file_get_contents($image));
 
-                            // Insert image content into database 
-                            $query="insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')";
-                             $rs=mysqli_query($conn,$query);
+                // Insert image content into database 
+                $query = "insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')";
+                $rs = mysqli_query($conn, $query);
 
-                                     if($rs)
-                                    { 
-                                            $status = 'success'; 
-                                            echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
-                                    }
-                                    else{ 
-                                            echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
-                                    }  
-                        }
-                        else{ 
-                            echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
-                        } 
+                if ($rs) {
+                    $status = 'success';
+                    echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
+                } else {
+                    echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
                 }
-                else{ 
-                     echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
-                } 
-    }
-        if(isset($_REQUEST['add'])){
-
-            $nic = $_REQUEST['nic'];
-            $email = $_REQUEST['email'];
-            $name = $_REQUEST['name'];
-            $date = $_REQUEST['date'];
-            $type = $_REQUEST['type'];
-            $Hname = $_REQUEST['hname'];
-            $price = $_REQUEST['price'];
-            $weight = $_REQUEST['weight'];
-
-
-            $query="select * from registration where nic='$nic' and email='$email' and Fname='$name'";
-            $rs=mysqli_query($conn,$query);
-            $rowcount = mysqli_num_rows($rs);
-            if($rowcount == 1)
-            {
-                $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight')";
-            if(mysqli_query($conn, $sql))
-            {
-                echo '<script type="text/javascript">alert("Order placed successfully");</script>';
-            } 
-        }
-            else
-            {
-                echo '<script type="text/javascript">alert("Please check the data provided");</script>';
+            } else {
+                echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
             }
-}
+        } else {
+            echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
+        }
+    }
+    if (isset($_REQUEST['add'])) {
+
+        $nic = $_REQUEST['nic'];
+        $email = $_REQUEST['email'];
+        $name = $_REQUEST['name'];
+        $date = $_REQUEST['date'];
+        $type = $_REQUEST['type'];
+        $Hname = $_REQUEST['hname'];
+        $price = $_REQUEST['price'];
+        $weight = $_REQUEST['weight'];
+
+
+        $query = "select * from registration where nic='$nic' and email='$email' and Fname='$name'";
+        $rs = mysqli_query($conn, $query);
+        $rowcount = mysqli_num_rows($rs);
+        if ($rowcount == 1) {
+            $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight')";
+            if (mysqli_query($conn, $sql)) {
+                echo '<script type="text/javascript">alert("Order placed successfully");</script>';
+            }
+        } else {
+            echo '<script type="text/javascript">alert("Please check the data provided");</script>';
+        }
+    }
     mysqli_close($conn);
-?>
+    ?>
 
 </head>
+
 <body>
 
     <!--header-area start-->
@@ -118,7 +109,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-2">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
+                            <h4><a href="index.html">ROOTED FOOT MART</a></h4>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -127,17 +118,22 @@
                                 <ul>
                                     <li><a href="index.html">Home</a>
                                     </li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="location.html">Mart</a>
+                                    </li>
+                                    <li><a href="harvest.html">Harvest</a>
+                                    </li>
+                                    <li><a href="contact.html">Place Order</a>
+                                    </li>
+                                    <li><a href="graphs.html">Insights</a>
                                     </li>
                                     <li><a href="#">Services</a>
                                     </li>
-                                    <li><a href="#">Gallery</a>
+                                    <li><a href="">Contact Us</a>
                                     </li>
-                                    <li><a href="#">Blog</a>
+                                    <li><a href="login.html">Sign In</a>
                                     </li>
-                                    <li><a href="#">Shop</a>
+                                    <li><a href="register.html">Sign Up</a>
                                     </li>
-                                    <li><a href="contact.html">Contact Us</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -168,36 +164,36 @@
                                     <input type="text" placeholder="NIC No" id="nic" name="nic" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Email" id="email"name="email" />
+                                    <input type="text" placeholder="Email" id="email" name="email" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="First Name" id="name"name="name" />
+                                    <input type="text" placeholder="First Name" id="name" name="name" />
                                 </div>
                                 <div class="col-lg-12">
                                     <br>
                                     <label for="exampleFormControlFile1"> Date of Harvest</label>
-                                    <input type="date" placeholder="Date" id="date" name="date"/>
+                                    <input type="date" placeholder="Date" id="date" name="date" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Harvest Type" id="harvesttype"name="type" />
+                                    <input type="text" placeholder="Harvest Type" id="harvesttype" name="type" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Name of harvest" id="harvestname" name="hname"/>
+                                    <input type="text" placeholder="Name of harvest" id="harvestname" name="hname" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Unit Price (Rs per kg)" id="unitprice" name="price"/>
+                                    <input type="text" placeholder="Unit Price (Rs per kg)" id="unitprice" name="price" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Weight (kg)" id="weight"name="weight" />
+                                    <input type="text" placeholder="Weight (kg)" id="weight" name="weight" />
                                 </div>
 
                                 <div class="form-group col-lg-12">
                                     <br>
                                     <form method="post" enctype="multipart/form-data">
-                                    Select image to upload:
+                                        Select image to upload:
                                         <input type="file" name="fileToUpload">
                                         <input type="submit" value="Upload Image" name="submit">
-                                    </form> 
+                                    </form>
                                 </div>
 
                                 <!-- <div class="col-lg-12">
@@ -256,11 +252,11 @@
                             <h4>Navigation</h4>
                             <div class="fooer-menu">
                                 <ul class="mr-40">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Service</a></li>
-                                    <li><a href="#">Gallery</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Shop</a></li>
+                                    <li><a href="#">Mart</a></li>
+                                    <li><a href="#">Harvest</a></li>
+                                    <li><a href="#">Order</a></li>
+                                    <li><a href="#">Insights</a></li>
+                                    <li><a href="#">Services</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -310,4 +306,5 @@
     <!-- main js -->
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>

@@ -36,33 +36,30 @@
     <link rel="stylesheet" href="css/index-style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-    
-<?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "MartInfoDB";
+    <?php
 
-$conn = mysqli_connect($servername,$username,$password,$dbname);
-if(isset($_REQUEST['submit'])){
-    
-    $nic=$_REQUEST['nic'];
-    $pass=$_REQUEST['pass'];
-    $query="select * from registration where nic='$nic' and pass='$pass'";
-    $rs=mysqli_query($conn,$query);
-    $rowcount = mysqli_num_rows($rs);
-    if($rowcount == 1)
-    {
-        header("location: index.php?user=$nic");
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "MartInfoDB";
+
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    if (isset($_REQUEST['submit'])) {
+
+        $nic = $_REQUEST['nic'];
+        $pass = $_REQUEST['pass'];
+        $query = "select * from registration where nic='$nic' and pass='$pass'";
+        $rs = mysqli_query($conn, $query);
+        $rowcount = mysqli_num_rows($rs);
+        if ($rowcount == 1) {
+            header("location: index.php?user=$nic");
+        } else {
+            echo '<script type="text/javascript">alert("Please check your NIC & Password");</script>';
+        }
     }
-    else
-    {
-        echo '<script type="text/javascript">alert("Please check your NIC & Password");</script>';
-    }
-}
-mysqli_close($conn);
-?>
+    mysqli_close($conn);
+    ?>
 </head>
 
 <body>
@@ -74,7 +71,7 @@ mysqli_close($conn);
                 <div class="row align-items-center">
                     <div class="col-sm-2">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
+                            <h4><a href="index.html">ROOTED FOOT MART</a></h4>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -83,19 +80,22 @@ mysqli_close($conn);
                                 <ul>
                                     <li><a href="index.html">Home</a>
                                     </li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="location.html">Mart</a>
                                     </li>
-                                    <li><a href="#">Services</a>
+                                    <li><a href="harvest.html">Harvest</a>
                                     </li>
-                                    <li><a href="#">Gallery</a>
+                                    <li><a href="contact.html">Place Order</a>
                                     </li>
-                                    <li><a href="#">Blog</a>
+                                    <li><a href="graphs.html">Insights</a>
                                     </li>
-                                    <li><a href="#">Shop</a>
+                                    <li><a href="#">Srvices</a>
                                     </li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="">Sign In</a></li>
-                                    <li><a href="">Sign Up</a></li>
+                                    <li><a href="">Contact Us</a>
+                                    </li>
+                                    <li><a href="login.html">Sign In</a>
+                                    </li>
+                                    <li><a href="register.html">Sign Up</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
