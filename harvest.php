@@ -39,7 +39,9 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-    $conn = mysqli_connect("localhost", "root", "", "MartInfoDB");
+    
+    
+    /*
     $ID = rand(10000, 99999);
     if (isset($_REQUEST['submit'])) {
         $status = 'error';
@@ -69,32 +71,36 @@
         } else {
             echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
         }
-    }
+    }*/
+    require("db.php");
+
     if (isset($_REQUEST['add'])) {
 
         $nic = $_REQUEST['nic'];
         $email = $_REQUEST['email'];
         $name = $_REQUEST['name'];
         $date = $_REQUEST['date'];
-        $type = $_REQUEST['type'];
-        $Hname = $_REQUEST['hname'];
+        $type = $_REQUEST['Type'];
+        $Hname = $_REQUEST['Hname'];
         $price = $_REQUEST['price'];
         $weight = $_REQUEST['weight'];
+        $lat = $_REQUEST['lat'];
+        $long = $_REQUEST['long'];
 
 
         $query = "select * from registration where nic='$nic' and email='$email' and Fname='$name'";
-        $rs = mysqli_query($conn, $query);
+        $rs = mysqli_query($connection, $query);
         $rowcount = mysqli_num_rows($rs);
         if ($rowcount == 1) {
-            $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight')";
-            if (mysqli_query($conn, $sql)) {
-                echo '<script type="text/javascript">alert("Order placed successfully");</script>';
+            $sql = "insert into harvestinfo (NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng) values ($nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long')";
+            if (mysqli_query($connection, $sql)) {
+                echo '<script type="text/javascript">alert("Harvest infomation recorded successfully");</script>';
             }
         } else {
             echo '<script type="text/javascript">alert("Please check the data provided");</script>';
         }
     }
-    mysqli_close($conn);
+    mysqli_close($connection);
     ?>
 
 </head>
@@ -179,28 +185,28 @@
                                     <!-- <input type="text" placeholder="Harvest Type" id="harvesttype" /> -->
                                     <label for="Type">Choose Harvest Type:</label>
                                     
-                                    <select name="Type" id="type">
-                                        <option value="vegetable" name="vegetable">Vegetable</option>
-                                        <option value="fruits" name="fruits">Fruits</option>
-                                        <option value="grains" name="grains">Grains</option>
-                                        <option value="leaves" name="leaves">Leaves</option>
+                                    <select  id="Type" name="Type">
+                                        <option value="vegetable" value="vegetable">Vegetable</option>
+                                        <option value="fruits" value="fruits">Fruits</option>
+                                        <option value="grains" value="grains">Grains</option>
+                                        <option value="leaves" value="leaves">Leaves</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-12">
                                     <!-- <input type="text" placeholder="Name of harvest" id="harvestname" /> -->
                                     <br>
-                                    <label for="Type">Choose Harvest :</label>
+                                    <label for="Hname">Choose Harvest :</label>
                                     
-                                    <select name="Type" id="type">
-                                        <option value="carrot" name="carrot">Carrot</option>
-                                        <option value="beans" name="beans">Beans</option>
-                                        <option value="beet" name="beet">Beet</option>
-                                        <option value="pumpkin" name="pumpkin">Pumpkin</option>
-                                        <option value="onion" name="onion">Onion</option>
-                                        <option value="leeks" name="leeks">Leeks</option>
-                                        <option value="potato" name="potato">Potato</option>
-                                        <option value="tomato" name="tomato">Tomato</option>
-                                        <option value="other" name="other">Other</option>
+                                    <select  id="Hname" name="Hname">
+                                        <option value="carrot" value="carrot">Carrot</option>
+                                        <option value="beans" value="beans">Beans</option>
+                                        <option value="beet" value="beet">Beet</option>
+                                        <option value="pumpkin" value="pumpkin">Pumpkin</option>
+                                        <option value="onion" value="onion">Onion</option>
+                                        <option value="leeks" value="leeks">Leeks</option>
+                                        <option value="potato" value="potato">Potato</option>
+                                        <option value="tomato" value="tomato">Tomato</option>
+                                        <option value="other" value="other">Other</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-12">
@@ -208,6 +214,12 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <input type="text" placeholder="Weight (kg)" id="weight" name="weight" />
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Latitude" id="lat" name="lat" />
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" placeholder="Longitude" id="long" name="long" />
                                 </div>
 
                                 <div class="form-group col-lg-12">
