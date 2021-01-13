@@ -39,7 +39,34 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-    ?>
+    $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
+    if(isset($_REQUEST['msgSubmit'])){
+
+        $ID = $_REQUEST['id'];
+        $nic = $_REQUEST['nic'];
+        $email = $_REQUEST['mail'];
+        $detail = $_REQUEST['det'];
+        $info = $_REQUEST['info'];
+
+        $query="select * from registration where nic='$nic'";
+        $rs=mysqli_query($conn,$query);
+        $rowcount = mysqli_num_rows($rs);
+        if($rowcount == 1)
+        {
+            $sql = "insert into order (OrderID,FNIC,Email,Detail,AddInfo) values ('$ID','$nic','$email','$detail','$info')";
+            if(mysqli_query($conn, $sql))
+            {
+                echo "<h1 align=center>Your Order was placed successfully.</h1>";
+            } 
+        }
+        else
+        {
+            echo '<script type="text/javascript">alert("This Farmer does not exist");</script>';
+        }
+
+}
+    mysqli_close($conn);
+?>
 </head>
 
 <body>
