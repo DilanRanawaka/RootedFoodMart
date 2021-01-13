@@ -100,6 +100,35 @@
             echo '<script type="text/javascript">alert("Please check the data provided");</script>';
         }
     }
+
+    if (isset($_REQUEST['update'])) {
+        $query = "select * from registration where nic='$nic' and email='$email'";
+        $rs = mysqli_query($connection, $query);
+        $rowcount = mysqli_num_rows($rs);
+        if ($rowcount == 1) {
+            $sql = "update harvestinfo set Name=$name,Date=$date,Type=$type,HName=$Hname,UPrice=$price,Weight=$weight,lat=$lat,lng=$long where NIC='$nic' AND Email='$email'";
+            if (mysqli_query($connection, $sql)) {
+                echo '<script type="text/javascript">alert("Harvest infomation updated successfully");</script>';
+            }
+        } else {
+            echo '<script type="text/javascript">alert("Please check the credentials provided");</script>';
+        }
+    }
+    mysqli_close($connection);
+
+    if (isset($_REQUEST['delete'])) {
+        $query = "select * from registration where nic='$nic' and email='$email'";
+        $rs = mysqli_query($connection, $query);
+        $rowcount = mysqli_num_rows($rs);
+        if ($rowcount == 1) {
+            $sql = "Delete from harvestinfo where NIC='$nic' AND Email='$email' ";
+            if (mysqli_query($connection, $sql)) {
+                echo '<script type="text/javascript">alert("Harvest infomation Deleted successfully");</script>';
+            }
+        } else {
+            echo '<script type="text/javascript">alert("Please check the credentials provided");</script>';
+        }
+    }
     mysqli_close($connection);
     ?>
 
