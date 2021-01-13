@@ -1,47 +1,49 @@
 <!doctype html>
 <!-- <html class="no-js" lang="zxx"> -->
 
-<?php
 
-include_once('Config.php');
+
+<?php 
+
+include_once('Config.php'); 
 
 $sql3 = "SELECT COUNT(1) FROM harvestinfo  WHERE HName = 'carrot' ";
-$result = mysqli_query($conn, $sql3) or die(mysqli_error($conn));
+$result = mysqli_query($conn, $sql3) or die( mysqli_error($conn));
 $row3 = mysqli_fetch_array($result);
 $total3 = $row3[0];
 
 
 $sql5 = "SELECT COUNT(1) FROM harvestinfo  WHERE HName = 'beet' ";
-$result5 = mysqli_query($conn, $sql5) or die(mysqli_error($conn));
+$result5 = mysqli_query($conn, $sql5) or die( mysqli_error($conn));
 $row5 = mysqli_fetch_array($result5);
 $total5 = $row5[0];
 
 
 $sql6 = "SELECT COUNT(1) FROM harvestinfo  WHERE HName = 'beans' ";
-$result6 = mysqli_query($conn, $sql6) or die(mysqli_error($conn));
+$result6 = mysqli_query($conn, $sql6) or die( mysqli_error($conn));
 $row6 = mysqli_fetch_array($result6);
 $total6 = $row6[0];
 
 
 $sql7 = "SELECT COUNT(1) FROM harvestinfo  WHERE HName = 'pumpkin' ";
-$result7 = mysqli_query($conn, $sql7) or die(mysqli_error($conn));
+$result7 = mysqli_query($conn, $sql7) or die( mysqli_error($conn));
 $row7 = mysqli_fetch_array($result7);
 $total7 = $row7[0];
 
 
 $sql8 = "SELECT COUNT(1) FROM harvestinfo  WHERE HName = 'pumpkin' ";
-$result8 = mysqli_query($conn, $sql8) or die(mysqli_error($conn));
+$result8 = mysqli_query($conn, $sql8) or die( mysqli_error($conn));
 $row8 = mysqli_fetch_array($result8);
 $total8 = $row8[0];
 
 
 $sql56 = "SELECT COUNT(1) FROM harvestinfo  WHERE status= '0' ";
-$result56 = mysqli_query($conn, $sql56) or die(mysqli_error($conn));
+$result56 = mysqli_query($conn, $sql56) or die( mysqli_error($conn));
 $row56 = mysqli_fetch_array($result56);
 $total56 = $row56[0];
-
+                   
 $sql58 = "SELECT COUNT(1) FROM harvestinfo  WHERE status= '1' ";
-$result58 = mysqli_query($conn, $sql58) or die(mysqli_error($conn));
+$result58 = mysqli_query($conn, $sql58) or die( mysqli_error($conn));
 $row58 = mysqli_fetch_array($result58);
 $total58 = $row58[0];
 
@@ -49,7 +51,7 @@ $total58 = $row58[0];
 
 
 
-?>
+ ?>
 
 
 <head>
@@ -158,77 +160,92 @@ $total58 = $row58[0];
                 <div class="col-lg-9 col-md-9 col-sm-12">
                     <div class="single-blog style-3 mb-60">
                         <div class="row">
+                          
+                        <canvas id="bar-chart" width="800" height="250"></canvas>
 
-                            <canvas id="bar-chart" width="800" height="250"></canvas>
+                        <canvas id="pie-chart" width="800" height="250"></canvas>
 
-                            <canvas id="pie-chart" width="800" height="250"></canvas>
+                        <canvas id="pie-chart2" width="800" height="250"></canvas>
 
-                            <canvas id="pie-chart2" width="800" height="250"></canvas>
+
 
                             <script>
 
-                            var table = <?php echo $total3 ?>;
-                            var table1 = <?php echo $total5 ?>;
-                            var table2 = <?php echo $total6 ?>;
-                            var table3 = <?php echo $total7 ?>;
-                            var table4 = <?php echo $total8 ?>;
+
+               var table = <?php  echo $total3?>;
+               var table1 = <?php  echo $total5?>;
+               var table2 = <?php  echo $total6?>;
+               var table3 = <?php  echo $total7?>;
+               var table4 = <?php  echo $total8 ?>;
+
+
+              
+
+               var  carrot = 1 * parseInt(table);
+              var  carrot1 = 1 * parseInt(table1);
+              var  carrot2 = 1 * parseInt(table2);
+              var  carrot3 = 1 * parseInt(table3);
+              var  carrot4 = 1 * parseInt(table4 );
+
+
+              var s11= <?php  echo $total56?>;
+             var  e11 = 1 * parseInt(s11);
+             var s12= <?php  echo $total58?>;
+             var  e12 = 1 * parseInt(s12);
+
+
+
+                               new Chart(document.getElementById("bar-chart"), {
+                                type: 'bar',
+                               data: {
+              labels: ['Carrot', 'Beans','Beet','pumpkin','onion','leeks' ],
+                  datasets: [
+                 {
+                   label: "Population (millions)",
+                  backgroundColor: ["#3e95cd","#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
+                      data: [carrot,carrot1,carrot2,carrot3,carrot4]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'vagitable'
+      }
+    }
+});
+
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["Pending", "confirmaed"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2"],
+        data: [ e11 , e12]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Pending and non pending '
+      }
+    }
+});
 
 
 
 
-                            var carrot = 1 * parseInt(table);
-                            var carrot1 = 1 * parseInt(table1);
-                            var carrot2 = 1 * parseInt(table2);
-                            var carrot3 = 1 * parseInt(table3);
-                            var carrot4 = 1 * parseInt(table4 );
 
 
-                            var s11= <?php echo $total56 ?>;
-                            var e11 = 1 * parseInt(s11);
-                            var s12= <?php echo $total58 ?>;
-                            var e12 = 1 * parseInt(s12);
 
 
-                            new Chart(document.getElementById("bar-chart"), {
-                            type: 'bar',
-                            data: {
-                            labels: ['Carrot', 'Beans','Beet','pumpkin','onion','leeks' ],
-                            datasets: [
-                            {
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd","#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
-                            data: [carrot,carrot1,carrot2,carrot3,carrot4]
-                            }
-                            ]
-                            },
-                            options: {
-                            legend: { display: false },
-                            title: {
-                            display: true,
-                            text: 'vagitable'
-                            }
-                            }
-                            });
 
-                            new Chart(document.getElementById("pie-chart"), {
-                            type: 'pie',
-                            data: {
-                            labels: ["Pending", "confirmaed"],
-                            datasets: [{
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2"],
-                            data: [ e11 , e12]
-                            }]
-                            },
-                            options: {
-                            title: {
-                            display: true,
-                            text: 'Pending and non pending '
-                            }
-                            }
-                            });
 
-                        </script>
+
+
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -244,7 +261,7 @@ $total58 = $row58[0];
             </div>
         </div>
     </div>
-
+    </div>
 
 
     <!--footer-area start-->
