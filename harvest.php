@@ -121,7 +121,7 @@
         $rs = mysqli_query($connection, $query);
         $rowcount = mysqli_num_rows($rs);
         if ($rowcount == 1) {
-            $sql = "Delete from harvestinfo where NIC='$nic' AND Email='$email' ";
+            $sql = "Delete from harvestinfo where NIC='$nic' AND Email='$email'";
             if (mysqli_query($connection, $sql)) {
                 echo '<script type="text/javascript">alert("Harvest infomation Deleted successfully");</script>';
             }
