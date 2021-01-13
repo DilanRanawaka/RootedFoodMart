@@ -175,10 +175,33 @@
                                     <input type="date" placeholder="Date" id="date" name="date" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Harvest Type" id="harvesttype" name="type" />
+                                    <br>
+                                    <!-- <input type="text" placeholder="Harvest Type" id="harvesttype" /> -->
+                                    <label for="Type">Choose Harvest Type:</label>
+                                    
+                                    <select name="Type" id="type">
+                                        <option value="vegetable" name="vegetable">Vegetable</option>
+                                        <option value="fruits" name="fruits">Fruits</option>
+                                        <option value="grains" name="grains">Grains</option>
+                                        <option value="leaves" name="leaves">Leaves</option>
+                                    </select>
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Name of harvest" id="harvestname" name="hname" />
+                                    <!-- <input type="text" placeholder="Name of harvest" id="harvestname" /> -->
+                                    <br>
+                                    <label for="Type">Choose Harvest :</label>
+                                    
+                                    <select name="Type" id="type">
+                                        <option value="carrot" name="carrot">Carrot</option>
+                                        <option value="beans" name="beans">Beans</option>
+                                        <option value="beet" name="beet">Beet</option>
+                                        <option value="pumpkin" name="pumpkin">Pumpkin</option>
+                                        <option value="onion" name="onion">Onion</option>
+                                        <option value="leeks" name="leeks">Leeks</option>
+                                        <option value="potato" name="potato">Potato</option>
+                                        <option value="tomato" name="tomato">Tomato</option>
+                                        <option value="other" name="other">Other</option>
+                                    </select>
                                 </div>
                                 <div class="col-lg-12">
                                     <input type="text" placeholder="Unit Price (Rs per kg)" id="unitprice" name="price" />
