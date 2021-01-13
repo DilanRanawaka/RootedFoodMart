@@ -50,7 +50,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-2">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
+                            <h4><a href="index.html">ROOTED FOOT MART</a></h4>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -59,17 +59,22 @@
                                 <ul>
                                     <li><a href="index.html">Home</a>
                                     </li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="location.html">Mart</a>
                                     </li>
-                                    <li><a href="#">Services</a>
+                                    <li><a href="harvest.html">Harvest</a>
                                     </li>
-                                    <li><a href="#">Gallery</a>
+                                    <li><a href="contact.html">Place Order</a>
                                     </li>
-                                    <li><a href="#">Blog</a>
+                                    <li><a href="graphs.html">Insights</a>
                                     </li>
-                                    <li><a href="#">Shop</a>
+                                    <li><a href="#">Srvices</a>
                                     </li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="">Contact Us</a>
+                                    </li>
+                                    <li><a href="login.html">Sign In</a>
+                                    </li>
+                                    <li><a href="register.html">Sign Up</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -140,8 +145,6 @@
             // google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
         }
-
-        
     </script>
 
     <!--footer-area start-->
@@ -176,11 +179,11 @@
                             <h4>Navigation</h4>
                             <div class="fooer-menu">
                                 <ul class="mr-40">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Service</a></li>
-                                    <li><a href="#">Gallery</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Shop</a></li>
+                                    <li><a href="#">Mart</a></li>
+                                    <li><a href="#">Harvest</a></li>
+                                    <li><a href="#">Order</a></li>
+                                    <li><a href="#">Insights</a></li>
+                                    <li><a href="#">Services</a></li>
                                 </ul>
                             </div>
                         </div>
