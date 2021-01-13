@@ -56,7 +56,7 @@ function get_confirmed_locations(){
     // update location with location_status if admin location_status.
     $sqldata = mysqli_query($con,"
 select id ,lat,lng,description,locationStatus as isconfirmed
-from locations WHERE  location_status = 1
+from locations WHERE  locationStatus = 1
   ");
 
     $rows = array();
@@ -81,8 +81,7 @@ function get_all_locations(){
     }
     // update location with location_status if admin location_status.
     $sqldata = mysqli_query($con,"
-select id ,lat,lng,description,locationStatus as isconfirmed
-from locations
+select id ,lat,lng,description,locationStatus as isconfirmed from locations
   ");
 
     $rows = array();
