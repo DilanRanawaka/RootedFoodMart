@@ -100,8 +100,6 @@
                             <ul>
                                 <li><a href="index.php">Home</a>
                                 </li>
-                                <li><a href="index.php">Home</a>
-                                </li>
                                 <li><a href="location.php">Mart</a>
                                 </li>
                                 <li><a href="harvest.php">Harvest</a>
@@ -109,10 +107,6 @@
                                 <li><a href="contact.php">Place Order</a>
                                 </li>
                                 <li><a href="graphs.php">Insights</a>
-                                </li>
-                                <li><a href="#">Services</a>
-                                </li>
-                                <li><a href="">Contact Us</a>
                                 </li>
                                 <li><a href="login.php">Sign In</a>
                                 </li>
