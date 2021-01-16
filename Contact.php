@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Contact</title>
+    <title>Place Order</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -53,7 +53,7 @@
         $rowcount = mysqli_num_rows($rs);
         if($rowcount == 1)
         {
-            $sql = "insert into order (OrderID,FNIC,Email,Detail,AddInfo) values ('$ID','$nic','$email','$detail','$info')";
+            $sql = "Insert into order (OrderID,FNIC,Email,Detail,AddInfo) values ('$ID','$nic','$email','$detail','$info')";
             if(mysqli_query($conn, $sql))
             {
                 echo "<h1 align=center>Your Order was placed successfully.</h1>";
@@ -90,23 +90,20 @@
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul>
-                                    <li><a href="index.html">Home</a>
+                                    <li><a href="index.php">Home</a>
                                     </li>
-                                    <li><a href="location.html">Mart</a>
+                                    <li><a href="location.php">Mart</a>
                                     </li>
-                                    <li><a href="harvest.html">Harvest</a>
+                                    <li><a href="harvest.php">Harvest</a>
                                     </li>
-                                    <li><a href="contact.html">Place Order</a>
+                                    <li><a href="contact.php">Place Order</a>
                                     </li>
-                                    <li><a href="graphs.html">Insights</a>
+                                    <li><a href="graphs.php">Insights</a>
                                     </li>
-                                    <li><a href="#">Srvices</a>
+                                    
+                                    <li><a href="login.php">Sign In</a>
                                     </li>
-                                    <li><a href="">Contact Us</a>
-                                    </li>
-                                    <li><a href="login.html">Sign In</a>
-                                    </li>
-                                    <li><a href="register.html">Sign Up</a>
+                                    <li><a href="register.php">Sign Up</a>
                                     </li>
                             </nav>
                         </div>
@@ -123,7 +120,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 sm-mt-75">
                     <div class="contact-form style-3">
-                        <form id="contactForm" data-toggle="validator" method="POST" action="http://careeraid.net/html/garden-preview/assets/php/contact.php">
+                        <form id="contactForm" data-toggle="validator" method="POST">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <input type="text" placeholder="Order ID" id="orderid" required data-error="NEW ERROR MESSAGE" />
@@ -140,15 +137,14 @@
                                 <div class="col-lg-12">
                                     <textarea placeholder="Additional Information" id="message"></textarea>
                                 </div>
-
                                 <div class="col-lg-8 text-left pt-30">
                                     <div id="msgSubmit" class="hidden"></div>
                                 </div>
-                            </div>
-                        </form>
-                        <div class="col-lg-4">
+                                <div class="col-lg-4">
                             <button class="btn-common" id="form-submit">Order</button>
                         </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
