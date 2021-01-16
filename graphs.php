@@ -119,11 +119,6 @@ $total58 = $row58[0];
                                     </li>
                                     <li><a href="graphs.php">Insights</a>
                                     </li>
-                                    <li><a href="#">Services</a>
-                                    </li>
-                                    <li><a href="">Contact Us</a>
-                                    </li>
-                                    |
                                     <li><a href="login.php">Sign In</a>
                                     </li>
                                     <li><a href="register.php">Sign Up</a>
