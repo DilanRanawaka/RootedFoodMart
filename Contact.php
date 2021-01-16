@@ -40,31 +40,34 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
     $conn = mysqli_connect("localhost", "root", "","martinfodb");
-    if(isset($_REQUEST['msgSubmit'])){
-
-        $ID = $_REQUEST['id'];
+    if(isset($_REQUEST['msgSubmit']))
+    { $ID = $_REQUEST['orderid'];
         $nic = $_REQUEST['nic'];
-        $email = $_REQUEST['mail'];
-        $detail = $_REQUEST['det'];
-        $info = $_REQUEST['info'];
-
+        $email = $_REQUEST['email'];
+        $detail = $_REQUEST['subject'];
+        $info = $_REQUEST['message'];
+        
         $query="select * from registration where nic='$nic'";
         $rs=mysqli_query($conn,$query);
         $rowcount = mysqli_num_rows($rs);
-        if($rowcount == 1)
+        if($rowcount>0)
         {
-            $sql = "Insert into order (OrderID,FNIC,Email,Detail,AddInfo) values ('$ID','$nic','$email','$detail','$info')";
-            if(mysqli_query($conn, $sql))
-            {
-                echo "<h1 align=center>Your Order was placed successfully.</h1>";
-            } 
+        $sql = "insert into order(OrderID,FNIC,Email,Detail,AddInfo) values('$ID','$nic','$email','$detail','$info')";
+        $result = mysqli_query($conn, $sql);
+                if ($result != NULL) 
+                {
+                    echo '<script type="text/javascript">alert("Your Order was placed successfully.");</script>';
+                }
+                else
+                {
+                    echo '<script type="text/javascript">alert("Sorry, Please try again.");</script>';
+                }
         }
         else
         {
             echo '<script type="text/javascript">alert("This Farmer does not exist");</script>';
         }
-
-}
+    }
     mysqli_close($conn);
 ?>
 </head>
@@ -100,7 +103,6 @@
                                     </li>
                                     <li><a href="graphs.php">Insights</a>
                                     </li>
-                                    
                                     <li><a href="login.php">Sign In</a>
                                     </li>
                                     <li><a href="register.php">Sign Up</a>
@@ -120,28 +122,28 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 sm-mt-75">
                     <div class="contact-form style-3">
-                        <form id="contactForm" data-toggle="validator" method="POST">
+                        <form id="contactForm" >
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Order ID" id="orderid" required data-error="NEW ERROR MESSAGE" />
+                                    <input type="text" placeholder="Order ID" id="orderid" name="orderid" required data-error="NEW ERROR MESSAGE" />
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Farmer's NIC No" id="nic" />
+                                    <input type="text" placeholder="Farmer's NIC No" id="nic" name="nic"/>
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Email" id="email" />
+                                    <input type="text" placeholder="Email" id="email" name="email" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="text" placeholder="Harvest Detail" id="subject" />
+                                    <input type="text" placeholder="Harvest Detail" id="subject" name="subject" />
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea placeholder="Additional Information" id="message"></textarea>
+                                    <textarea placeholder="Additional Information" id="message" name="message"></textarea>
                                 </div>
                                 <div class="col-lg-8 text-left pt-30">
-                                    <div id="msgSubmit" class="hidden"></div>
+                                    <div id="msgSubmit" class="hidden" name="msgSubmit" value="msgSubmit"></div>
                                 </div>
                                 <div class="col-lg-4">
-                            <button class="btn-common" id="form-submit">Order</button>
+                            <button class="btn-common" id="form-submit" name="msgSubmit" value="msgSubmit">Order</button>
                         </div>
                             </div>
                         </form>
