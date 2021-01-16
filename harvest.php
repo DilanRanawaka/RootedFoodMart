@@ -40,40 +40,50 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
     
-    
-    /*
-    $ID = rand(10000, 99999);
-    if (isset($_REQUEST['submit'])) {
-        $status = 'error';
-        // Get file info 
-        $fileName = basename($_FILES["fileToUpload"]["name"]);
-        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        if (!empty($_FILES["fileToUpload"]["name"])) {
-            // Allow certain file formats 
-            $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
-            if (in_array($fileType, $allowTypes)) {
-                $image = $_FILES['fileToUpload']['tmp_name'];
-                $imgContent = addslashes(file_get_contents($image));
-
-                // Insert image content into database 
-                $query = "insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')";
-                $rs = mysqli_query($conn, $query);
-
-                if ($rs) {
-                    $status = 'success';
-                    echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
-                } else {
-                    echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
-                }
-            } else {
-                echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
-            }
-        } else {
-            echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
-        }
-    }*/
     require("db.php");
+    /*
+    $conn = mysqli_connect("localhost", "root", "","martinfodb");
+    $ID = rand(10000, 99999);
 
+    if(isset($_REQUEST['submit']))
+    { 
+        $status = 'error'; 
+    // Get file info 
+    $fileName = basename($_FILES["image"]["name"]); 
+    $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION)); 
+                if(!empty($_FILES["image"]["name"])) { 
+
+                // Allow certain file formats 
+                $allowTypes = array('jpg','png','jpeg','gif'); 
+                        if(in_array($fileType, $allowTypes))
+                        { 
+                        $image = $_FILES['image']['tmp_name']; 
+                        $imgContent = addslashes(file_get_contents($image)); 
+
+                        // Insert image content into database 
+                        $query="insert into images (IMAGE,HID) VALUES ('$imgContent','$ID')";
+                        $rs=mysqli_query($conn,$query);
+
+                                if($rs){ 
+                                    $status = 'success'; 
+                                    echo '<script type="text/javascript">alert("Image uploaded successfully.");</script>';
+                                }
+                                else{ 
+                                    echo '<script type="text/javascript">alert("Image upload failed, please try again.");</script>';
+                                }  
+                        }
+                        else{ 
+                            echo '<script type="text/javascript">alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.");</script>';
+                            } 
+                }
+                else{ 
+                    echo '<script type="text/javascript">alert("Please select an image file to upload.");</script>';
+                    } 
+    }
+    else{
+        echo '<script type="text/javascript">alert("Please retry");</script>';
+    }*/
+   
     if (isset($_REQUEST['add'])) {
 
         $nic = $_REQUEST['nic'];
@@ -89,11 +99,12 @@
 
 
         $query = "select * from registration where nic='$nic' and email='$email' and Fname='$name'";
-        $rs = mysqli_query($connection, $query);
-        $rowcount = mysqli_num_rows($rs);
-        if ($rowcount == 1) {
-            $sql = "insert into harvestinfo (NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng) values ($nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long')";
-            if (mysqli_query($connection, $sql)) {
+        $sql = "insert into harvestinfo (NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng) values ('$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long')";
+         $rs = mysqli_query($connection, $query);
+       $rowcount = mysqli_num_rows($rs);
+        if ($rowcount>0) {
+            $result = mysqli_query($connection, $sql);
+            if ($result != NULL) {
                 echo '<script type="text/javascript">alert("Harvest infomation recorded successfully");</script>';
             }
         } else {
@@ -114,7 +125,7 @@
             echo '<script type="text/javascript">alert("Please check the credentials provided");</script>';
         }
     }
-    mysqli_close($connection);
+   
 
     if (isset($_REQUEST['delete'])) {
         $query = "select * from registration where nic='$nic' and email='$email'";
@@ -129,7 +140,7 @@
             echo '<script type="text/javascript">alert("Please check the credentials provided");</script>';
         }
     }
-    mysqli_close($connection);
+   
     ?>
 
 </head>
@@ -151,23 +162,23 @@
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul>
-                                    <li><a href="index.html">Home</a>
+                                    <li><a href="index.php">Home</a>
                                     </li>
-                                    <li><a href="location.html">Mart</a>
+                                    <li><a href="location.php">Mart</a>
                                     </li>
-                                    <li><a href="harvest.html">Harvest</a>
+                                    <li><a href="harvest.php">Harvest</a>
                                     </li>
-                                    <li><a href="contact.html">Place Order</a>
+                                    <li><a href="contact.php">Place Order</a>
                                     </li>
-                                    <li><a href="graphs.html">Insights</a>
+                                    <li><a href="graphs.php">Insights</a>
                                     </li>
                                     <li><a href="#">Services</a>
                                     </li>
                                     <li><a href="">Contact Us</a>
                                     </li>
-                                    <li><a href="login.html">Sign In</a>
+                                    <li><a href="login.php">Sign In</a>
                                     </li>
-                                    <li><a href="register.html">Sign Up</a>
+                                    <li><a href="register.php">Sign Up</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -250,27 +261,28 @@
                                 <div class="col-lg-12">
                                     <input type="text" placeholder="Longitude" id="long" name="long" />
                                 </div>
-
+                                 
                                 <div class="form-group col-lg-12">
                                     <br>
-                                    <form method="post" enctype="multipart/form-data">
-                                        Select image to upload:
-                                        <input type="file" name="fileToUpload">
+                                    <form  method="POST" enctype="multipart/form-data">
+                                    <label for="image">Select image to upload:</label>
+                                        <input type="file" name="image" id="image">
                                         <input type="submit" value="Upload Image" name="submit">
-                                    </form>
+                                        </form>
                                 </div>
 
                                 <!-- <div class="col-lg-12">
                                     <textarea placeholder="Message" id="message"></textarea>
                                 </div> -->
                                 <div class="col-lg-4">
-                                    <button class="btn-common" id="add" name="add">ADD</button>
+                                <!--<input type="submit" name="add" class="btn-common" value="add" id="add">-->
+                                    <button type="submit" class="btn-common" id="add" name="add" value="add">ADD</button>
                                 </div>
                                 <div class="col-lg-4">
-                                    <button class="btn-common" id="update" name="update">UPDATE</button>
+                                    <button type="submit" class="btn-common" id="update" name="update" value="update">UPDATE</button>
                                 </div>
                                 <div class="col-lg-4">
-                                    <button class="btn-common" id="clear" name="delete">DELETE</button>
+                                    <button type="submit" class="btn-common" id="clear" name="delete" value="delete">DELETE</button>
                                 </div>
                                 <!-- <div class="col-lg-8 text-left pt-30">
                                     <div id="msgSubmit" class="hidden"></div>

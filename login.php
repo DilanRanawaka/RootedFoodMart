@@ -42,7 +42,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "MartInfoDB";
+    $dbname = "martinfodb";
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     if (isset($_REQUEST['submit'])) {
@@ -53,7 +53,8 @@
         $rs = mysqli_query($conn, $query);
         $rowcount = mysqli_num_rows($rs);
         if ($rowcount == 1) {
-            header("location: index.php?user=$nic");
+            echo '<script type="text/javascript">alert("WELCOME");</script>';
+            header('location:index.php?user=$nic');
         } else {
             echo '<script type="text/javascript">alert("Please check your NIC & Password");</script>';
         }
@@ -78,23 +79,23 @@
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul>
-                                    <li><a href="index.html">Home</a>
+                                    <li><a href="index.php">Home</a>
                                     </li>
-                                    <li><a href="location.html">Mart</a>
+                                    <li><a href="location.php">Mart</a>
                                     </li>
-                                    <li><a href="harvest.html">Harvest</a>
+                                    <li><a href="harvest.php">Harvest</a>
                                     </li>
-                                    <li><a href="contact.html">Place Order</a>
+                                    <li><a href="contact.php">Place Order</a>
                                     </li>
-                                    <li><a href="graphs.html">Insights</a>
+                                    <li><a href="graphs.php">Insights</a>
                                     </li>
                                     <li><a href="#">Srvices</a>
                                     </li>
                                     <li><a href="">Contact Us</a>
                                     </li>
-                                    <li><a href="login.html">Sign In</a>
+                                    <li><a href="login.php">Sign In</a>
                                     </li>
-                                    <li><a href="register.html">Sign Up</a>
+                                    <li><a href="register.php">Sign Up</a>
                                     </li>
                                 </ul>
                             </nav>

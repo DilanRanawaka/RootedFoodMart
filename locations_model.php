@@ -7,7 +7,7 @@ require("db.php");
 
 
 function get_all_locations(){
-    $con=mysqli_connect ("127.0.0.1:3307", 'root', '','martinfodb');
+    $con=mysqli_connect ("localhost", 'root', '','martinfodb');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
     }

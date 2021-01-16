@@ -38,7 +38,7 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-    $link = mysqli_connect("localhost", "root", "", "MartInfoDB");
+    $link = mysqli_connect("localhost", "root", "", "martinfodb");
 
     if (isset($_REQUEST['register'])) {
         $FName = $_REQUEST['first_name'];
@@ -57,10 +57,11 @@
         if ($Pass == $conpass) {
             $query = "insert into registration (fname,lname,nic,pass,address,street,district,zip,province,email,pno) values ('$FName','$LName','$NIC','$Pass','$address','$street','$district','$code','$province','$email','$number')";
             $result = mysqli_query($link, $query);
-
-            if (!($result == NULL)) {
-                echo '<script type="text/javascript>alert("Registration is successful. Please log in.");</script>';
-                header("location: login.php");
+      
+        if($result != NULL)
+             {
+                echo '<script type="text/javascript">alert("Registration is successful. Please log in.");</script>';
+                header('location: login.php');
             } else {
                 echo '<script type="text/javascript">alert("Registration is unsuccessful.");</script>';
             }
@@ -97,25 +98,25 @@
                     <div class="mainmenu text-center">
                         <nav>
                             <ul>
-                                <li><a href="index.html">Home</a>
+                                <li><a href="index.php">Home</a>
                                 </li>
-                                <li><a href="index.html">Home</a>
+                                <li><a href="index.php">Home</a>
                                 </li>
-                                <li><a href="location.html">Mart</a>
+                                <li><a href="location.php">Mart</a>
                                 </li>
-                                <li><a href="harvest.html">Harvest</a>
+                                <li><a href="harvest.php">Harvest</a>
                                 </li>
-                                <li><a href="contact.html">Place Order</a>
+                                <li><a href="contact.php">Place Order</a>
                                 </li>
-                                <li><a href="graphs.html">Insights</a>
+                                <li><a href="graphs.php">Insights</a>
                                 </li>
-                                <li><a href="#">Srvices</a>
+                                <li><a href="#">Services</a>
                                 </li>
                                 <li><a href="">Contact Us</a>
                                 </li>
-                                <li><a href="login.html">Sign In</a>
+                                <li><a href="login.php">Sign In</a>
                                 </li>
-                                <li><a href="register.html">Sign Up</a>
+                                <li><a href="register.php">Sign Up</a>
                                 </li>
                             </ul>
                         </nav>
@@ -144,10 +145,10 @@
                         <input type="text" name="nic" class="nic" id="nic" placeholder="NIC No" required>
                     </div>
                     <div class="form-row form-row-3">
-                        <input type="text" name="password" class="password" id="password" placeholder="Password" required>
+                        <input type="password" name="password" class="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="form-row form-row-4">
-                        <input type="text" name="confirmpassword" class="confirmpassword" id="confirmpassword" placeholder="Confirm Password" required>
+                        <input type="password" name="confirmpassword" class="confirmpassword" id="confirmpassword" placeholder="Confirm Password" required>
                     </div>
                 </div>
                 <div class="form-right">

@@ -1,10 +1,10 @@
 <html>
 <head>
 <?php
- $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
+ $conn = mysqli_connect("localhost", "root", "","martinfodb");
  $ID = rand(10000, 99999);
 
-  if(isset($_REQUEST["submit"])){ 
+  if(isset($_POST['submit'])){ 
 	$status = 'error'; 
 // Get file info 
 $fileName = basename($_FILES["image"]["name"]); 
@@ -42,11 +42,12 @@ else{
 }
 
 ?>
+
 </head>
 <body>
 <form method="post" enctype="multipart/form-data">
 Select image to upload:
-	<input type="file" name="image" id="fileToUpload">
+	<input type="file" name="image" id="image">
     <input type="submit" value="Upload Image" name="submit">
 </form> 
 </body>

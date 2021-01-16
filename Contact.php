@@ -39,7 +39,7 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <?php
-    $conn = mysqli_connect("localhost", "root", "","MartInfoDB");
+    $conn = mysqli_connect("localhost", "root", "","martinfodb");
     if(isset($_REQUEST['msgSubmit'])){
 
         $ID = $_REQUEST['id'];
