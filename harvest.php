@@ -83,7 +83,7 @@
     else{
         echo '<script type="text/javascript">alert("Please retry");</script>';
     }*/
-   
+    $ID = rand(10000, 99999);
     if (isset($_REQUEST['add'])) {
 
         $nic = $_REQUEST['nic'];
@@ -99,10 +99,11 @@
 
 
         $query = "select * from registration where nic='$nic' and email='$email' and Fname='$name'";
-        $sql = "insert into harvestinfo (NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng) values ('$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long')";
+       
          $rs = mysqli_query($connection, $query);
        $rowcount = mysqli_num_rows($rs);
         if ($rowcount>0) {
+            $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng,status) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long','1')";
             $result = mysqli_query($connection, $sql);
             if ($result != NULL) {
                 echo '<script type="text/javascript">alert("Harvest infomation recorded successfully");</script>';
@@ -113,11 +114,23 @@
     }
 
     if (isset($_REQUEST['update'])) {
-        $query = "select * from registration where nic='$nic' and email='$email'";
+        $nic = $_REQUEST['nic'];
+        $email = $_REQUEST['email'];
+        $name = $_REQUEST['name'];
+        $date = $_REQUEST['date'];
+        $type = $_REQUEST['Type'];
+        $Hname = $_REQUEST['Hname'];
+        $price = $_REQUEST['price'];
+        $weight = $_REQUEST['weight'];
+        $lat = $_REQUEST['lat'];
+        $long = $_REQUEST['long'];
+
+        $query = "select * from registration where NIC='$nic' and Email='$email'";
         $rs = mysqli_query($connection, $query);
         $rowcount = mysqli_num_rows($rs);
         if ($rowcount == 1) {
-            $sql = "update harvestinfo set Name=$name,Date=$date,Type=$type,HName=$Hname,UPrice=$price,Weight=$weight,lat=$lat,lng=$long where NIC='$nic' AND Email='$email'";
+            
+            $sql = "update harvestinfo set UPrice=$price,Weight=$weight where NIC='$nic' AND Email='$email'";
             if (mysqli_query($connection, $sql)) {
                 echo '<script type="text/javascript">alert("Harvest infomation updated successfully");</script>';
             }
@@ -128,6 +141,9 @@
    
 
     if (isset($_REQUEST['delete'])) {
+        $nic = $_REQUEST['nic'];
+        $email = $_REQUEST['email'];
+        
         $query = "select * from registration where nic='$nic' and email='$email'";
         $rs = mysqli_query($connection, $query);
         $rowcount = mysqli_num_rows($rs);
