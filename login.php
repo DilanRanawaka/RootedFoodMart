@@ -85,10 +85,6 @@
                                     </li>
                                     <li><a href="graphs.php">Insights</a>
                                     </li>
-                                    <li><a href="#">Srvices</a>
-                                    </li>
-                                    <li><a href="">Contact Us</a>
-                                    </li>
                                     <li><a href="login.php">Sign In</a>
                                     </li>
                                     <li><a href="register.php">Sign Up</a>
