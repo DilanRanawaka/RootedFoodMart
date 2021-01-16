@@ -8,9 +8,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <link rel="manifest" href="site.html"> -->
-    <!-- <link rel="apple-touch-icon" href="icon.html"> -->
-    <!-- Place favicon.ico in the root directory -->
 
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
