@@ -143,7 +143,7 @@
     if (isset($_REQUEST['delete'])) {
         $nic = $_REQUEST['nic'];
         $email = $_REQUEST['email'];
-        
+
         $query = "select * from registration where nic='$nic' and email='$email'";
         $rs = mysqli_query($connection, $query);
         $rowcount = mysqli_num_rows($rs);
@@ -187,10 +187,6 @@
                                     <li><a href="contact.php">Place Order</a>
                                     </li>
                                     <li><a href="graphs.php">Insights</a>
-                                    </li>
-                                    <li><a href="#">Services</a>
-                                    </li>
-                                    <li><a href="">Contact Us</a>
                                     </li>
                                     <li><a href="login.php">Sign In</a>
                                     </li>
