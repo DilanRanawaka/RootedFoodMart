@@ -169,15 +169,15 @@
                     </div>
                     <div class="form-row">
                         <select name="Province">
-                            <option value="country">Province</option>
-                            <option value="Vietnam">Western Province</option>
-                            <option value="Malaysia">Southern Province</option>
-                            <option value="India">Eastern Province</option>
-                            <option value="country">Northern Province</option>
-                            <option value="Vietnam">North Western Province</option>
-                            <option value="Malaysia">North Central Province</option>
-                            <option value="India">Uva Province</option>
-                            <option value="country">Sabaragamuwa Province</option>
+                            <option value="Province">Province</option>
+                            <option value="Western Province">Western Province</option>
+                            <option value="Southern Province">Southern Province</option>
+                            <option value="Eastern Province">Eastern Province</option>
+                            <option value="Northern Province">Northern Province</option>
+                            <option value="North Western Province">North Western Province</option>
+                            <option value="North Central Province">North Central Province</option>
+                            <option value="Uva Province">Uva Province</option>
+                            <option value="Sabaragamuwa Province">Sabaragamuwa Province</option>
                         </select>
                         <span class="select-btn">
                             <i class="zmdi zmdi-chevron-down"></i>

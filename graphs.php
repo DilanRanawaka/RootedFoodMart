@@ -109,24 +109,24 @@ $total58 = $row58[0];
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul>
-                                    <li><a href="index.html">Home</a>
+                                    <li><a href="index.php">Home</a>
                                     </li>
-                                    <li><a href="location.html">Mart</a>
+                                    <li><a href="location.php">Mart</a>
                                     </li>
-                                    <li><a href="harvest.html">Harvest</a>
+                                    <li><a href="harvest.php">Harvest</a>
                                     </li>
-                                    <li><a href="contact.html">Place Order</a>
+                                    <li><a href="contact.php">Place Order</a>
                                     </li>
-                                    <li><a href="graphs.html">Insights</a>
+                                    <li><a href="graphs.php">Insights</a>
                                     </li>
                                     <li><a href="#">Services</a>
                                     </li>
                                     <li><a href="">Contact Us</a>
                                     </li>
                                     |
-                                    <li><a href="login.html">Sign In</a>
+                                    <li><a href="login.php">Sign In</a>
                                     </li>
-                                    <li><a href="register.html">Sign Up</a>
+                                    <li><a href="register.php">Sign Up</a>
                                     </li>
                                 </ul>
                             </nav>

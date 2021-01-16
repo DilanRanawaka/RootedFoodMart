@@ -36,17 +36,14 @@
     <link rel="stylesheet" href="css/index-style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-
+    
     <?php
-
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "martinfodb";
-
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     if (isset($_REQUEST['submit'])) {
-
         $nic = $_REQUEST['nic'];
         $pass = $_REQUEST['pass'];
         $query = "select * from registration where nic='$nic' and pass='$pass'";
@@ -62,7 +59,6 @@
     mysqli_close($conn);
     ?>
 </head>
-
 <body>
 
     <!--header-area start-->

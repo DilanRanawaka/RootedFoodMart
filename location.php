@@ -8,8 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <link rel="manifest" href="site.html"> -->
-    <!-- <link rel="apple-touch-icon" href="icon.html"> -->
+    <link rel="manifest" href="site.html">
+    <link rel="apple-touch-icon" href="icon.html">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- bootstrap v4.0.0 -->
@@ -38,18 +38,112 @@
     <link rel="stylesheet" href="css/index-style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+    
+<?php
+include_once 'header.php';
+include_once 'locations_model.php';
+?>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
-    <?php
-    // include_once 'header.php';
-    include_once 'locations_model.php';
-    ?>
+<div id="map"></div>
 
+<!------ Include the above in your HEAD tag ---------->
 
 </head>
 
 <body>
+<script>
+    var map;
+    var marker;
+    var infowindow;
+    var red_icon =  'http://maps.google.com/mapfiles/ms/icons/red-dot.png' ;
+    var purple_icon =  'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' ;
+    var locations = <?php get_all_locations() ?>;
+   
+    function initMap() {
+        var france = {lat:  6.785277702704765, lng: 80.11392854687506};
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: france,
+            zoom: 8,
+           
+        });
+
+        var i ; var confirmed = 0;
+        for (i = 0; i < locations.length; i++) {
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon :   locations[i][5] === '1' ?  red_icon  : purple_icon,
+                html: document.getElementById('form')
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    confirmed =  locations[i][5] === '1' ?  'checked'  :  0;
+                    $("#location_status").prop(confirmed,locations[i][5]);
+                    $("#id").val(locations[i][0]);
+                    $("#lat").val(locations[i][1]);
+                    $("#lng").val(locations[i][2]);
+                    $("#NIC").val(locations[i][3]);
+                    $("#Email").val(locations[i][4]);
+                    $("#status").val(locations[i][5]);
+                  
+                    $("#form").show();
+                    infowindow.setContent(marker.html);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+
+<div style="display: none" id="form"  >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">    
+
+<div class="container" style="background-color: #61bc47;">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src=""  id="image">
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">ODER<i class="material-icons right"></i></span>
+
+        <h5>HID:</h5>
+          <textarea disabled id='id' ></textarea>
+          <h5>HID:</h5>
+          <textarea disabled id='NIC' ></textarea>
+          <h5>HID:</h5>
+          <textarea disabled id='Email' ></textarea>
+          <h5>HID:</h5>
+          <textarea disabled id='status' ></textarea>
+        </p>
+      </div>
+     
+    </div>
+  </div>
+
+</div>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqyQucrB0MzSqxh-AS0iBAnqRec7MQwto&callback=initMap">
+
+
+</script>
+<style>
+
+textarea{
+
+border: none;
+background-color: #fff;
+font-size: 30px;
+color: #000;
+
+}
+
+</style>
     <!--header-area start-->
     <header class="header-area">
         <!--header-->
@@ -71,11 +165,14 @@
                                     </li>
                                     <li><a href="harvest.php">Harvest</a>
                                     </li>
-                                    <li><a href="Contact.php">Place Order</a>
+                                    <li><a href="contact.php">Place Order</a>
                                     </li>
                                     <li><a href="graphs.php">Insights</a>
                                     </li>
-                                    |
+                                    <li><a href="#">Srvices</a>
+                                    </li>
+                                    <li><a href="">Contact Us</a>
+                                    </li>
                                     <li><a href="login.php">Sign In</a>
                                     </li>
                                     <li><a href="register.php">Sign Up</a>
@@ -106,130 +203,14 @@
         </div>
     </div>
 
-    <!-- <div class="google-map-area mt-80 sm-mt-75 xs-mt-50">
+    <div class="google-map-area mt-80 sm-mt-75 xs-mt-50">
         <div id="googleMap" class="gmap-two"></div>
-    </div> -->
-    <!-- <div id="googleMap" style="width:100%;height:400px"></div> -->
-    <div id="map"></div>
-
-    <script>
-        var map;
-        var marker;
-        var infowindow;
-        var red_icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-        var purple_icon = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-        var locations = <?php get_all_locations() ?>;
-
-        function initMap() {
-            var france = {
-                lat: 6.785277702704765,
-                lng: 80.11392854687506
-            };
-            infowindow = new google.maps.InfoWindow();
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: france,
-                zoom: 8,
-
-            });
-
-
-            var i;
-            var confirmed = 0;
-            for (i = 0; i < locations.length; i++) {
-
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map,
-                    animation: google.maps.Animation.DROP,
-                    icon: locations[i][5] === '1' ? red_icon : purple_icon,
-                    html: document.getElementById('form')
-                });
-
-
-
-
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        confirmed = locations[i][5] === '1' ? 'checked' : 0;
-                        $("#location_status").prop(confirmed, locations[i][5]);
-                        $("#id").val(locations[i][0]);
-                        $("#lat").val(locations[i][1]);
-                        $("#lng").val(locations[i][2]);
-                        $("#NIC").val(locations[i][3]);
-                        $("#Email").val(locations[i][4]);
-                        $("#status").val(locations[i][5]);
-
-
-                        $("#form").show();
-                        infowindow.setContent(marker.html);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
-        }
-    </script>
-
-
-    <div style="display: none" id="form">
-
-
-        <div class="container" style="background-color: #61bc47;">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="" id="image">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">ORDER<i class="material-icons right"></i></span>
-
-
-                    <h6>Harvest ID:</h6>
-                    <textarea disabled id='id'></textarea>
-                    <h6>Farmer NIC:</h6>
-                    <textarea disabled id='NIC'></textarea>
-                    <h6>Farmer Email:</h6>
-                    <textarea disabled id='Email'></textarea>
-                    <h6>Status:</h6>
-                    <textarea disabled id='status'></textarea>
-
-                    <button type="button" class="btn btn-secondary">Order</button>
-
-
-                </div>
-            </div>
-        </div>
     </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqyQucrB0MzSqxh-AS0iBAnqRec7MQwto&callback=initMap">
-
-
-    </script>
-    <style>
-        textarea {
-
-            border: none;
-            background-color: #fff;
-            font-size: 20px;
-            color: #000;
-        }
-    </style>
-    <style>
-        /* Optional: Makes the sample page fill the window. */
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-        #map {
-            height: 100%;
-        }
-    </style>
+    <!-- <div id="googleMap" style="width:100%;height:400px"></div> -->
 
     <!-- <script src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script> -->
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9kJ-z44cnQ3QJHff1sQTlbnEYH-plu48&callback=myMap"></script> -->
-    <!-- <script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9kJ-z44cnQ3QJHff1sQTlbnEYH-plu48&callback=myMap"></script>
+    <script>
         google.maps.event.addDomListener(window, 'load', myMap);
 
         function myMap() {
@@ -266,7 +247,7 @@
             // google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
         }
-    </script> -->
+    </script>
 
     <!--footer-area start-->
     <footer class="footer-area">
@@ -324,9 +305,6 @@
         </div>
     </footer>
     <!--footer-area end-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 
     <!-- modernizr js -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>

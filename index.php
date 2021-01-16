@@ -45,7 +45,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-2">
                         <div class="logo">
-                            <h4><a href="index.html">ROOTED FOOT MART</a></h4>
+                            <h4><a href="index.php">ROOTED FOOT MART</a></h4>
                         </div>
                     </div>
                     <div class="col-sm-8">
