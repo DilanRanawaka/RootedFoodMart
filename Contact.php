@@ -52,15 +52,15 @@
         $rowcount = mysqli_num_rows($rs);
         if($rowcount>0)
         {
-        $sql = "insert into order(OrderID,FNIC,Email,Detail,AddInfo) values('$ID','$nic','$email','$detail','$info')";
-        $result = mysqli_query($conn, $sql);
-                if ($result != NULL) 
+        $sql = "insert into contactorder (OrderID,FNIC,Email,Details,AddInfo) values ('$ID','$nic','$email','$detail','$info')";
+                if (mysqli_query($conn, $sql)) 
                 {
                     echo '<script type="text/javascript">alert("Your Order was placed successfully.");</script>';
                 }
                 else
                 {
                     echo '<script type="text/javascript">alert("Sorry, Please try again.");</script>';
+                    echo("Error description: " . mysqli_error($conn));
                 }
         }
         else
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 sm-mt-75">
                     <div class="contact-form style-3">
-                        <form id="contactForm" >
+                        <form id="contactForm">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <input type="text" placeholder="Order ID" id="orderid" name="orderid" required data-error="NEW ERROR MESSAGE" />
