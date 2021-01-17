@@ -105,7 +105,9 @@
             $sql = "Insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng,status) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long','1')";
             $result = mysqli_query($connection, $sql);
             if ($result != NULL) {
-                echo '<script type="text/javascript">alert("Harvest infomation recorded successfully");</script>';
+                echo '<script type="text/javascript">alert("Harvest infomation recorded successfully.");</script>';
+                $str1="Your Harvest ID is ";
+                echo $name." ".$str1 . " " . $ID;
             }
             else{
                 echo("Error description: " . mysqli_error($connection));
