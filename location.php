@@ -151,7 +151,12 @@ require("header.php");
                     <h6>Status:</h6>
                     <textarea disabled id='status'></textarea>
 
-                    <button type="button" class="btn btn-secondary">Order</button>
+                    <button type="button" class="btn btn-secondary" id="myButton">Order</button>
+                    <script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "Contact.php";
+    };
+    </script>
 
 
                 </div>
