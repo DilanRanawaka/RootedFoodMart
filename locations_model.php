@@ -12,7 +12,7 @@ function get_all_locations(){
         die('Not connected : ' . mysqli_connect_error());
     }
     // update location with location_status if admin location_status.
-    $sqldata = mysqli_query($con,"select HID,lat,lng,NIC,Email,status from harvestinfo");
+    $sqldata = mysqli_query($con,"select Hname,lat,lng,NIC,Email,status from harvestinfo");
 
     $rows = array();
     while($r = mysqli_fetch_assoc($sqldata)) {

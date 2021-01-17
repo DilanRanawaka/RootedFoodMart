@@ -142,7 +142,7 @@ require("header.php");
                     <span class="card-title activator grey-text text-darken-4">ORDER<i class="material-icons right"></i></span>
 
 
-                    <h6>Harvest ID:</h6>
+                    <h6>Harvest Type:</h6>
                     <textarea disabled id='id'></textarea>
                     <h6>Farmer NIC:</h6>
                     <textarea disabled id='NIC'></textarea>
