@@ -99,14 +99,16 @@
 
 
         $query = "select * from registration where nic='$nic' and email='$email' and Fname='$name'";
-       
          $rs = mysqli_query($connection, $query);
        $rowcount = mysqli_num_rows($rs);
         if ($rowcount>0) {
-            $sql = "insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng,status) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long','1')";
+            $sql = "Insert into harvestinfo (HID,NIC,Email,Name,Date,Type,HName,UPrice,Weight,lat,lng,status) values ('$ID','$nic','$email','$name','$date','$type','$Hname','$price','$weight','$lat','$long','1')";
             $result = mysqli_query($connection, $sql);
             if ($result != NULL) {
                 echo '<script type="text/javascript">alert("Harvest infomation recorded successfully");</script>';
+            }
+            else{
+                echo("Error description: " . mysqli_error($connection));
             }
         } else {
             echo '<script type="text/javascript">alert("Please check the data provided");</script>';
