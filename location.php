@@ -47,46 +47,9 @@
 </head>
 
 <body>
-    <!--header-area start-->
-    <header class="header-area">
-        <!--header-->
-        <div id="sticker" class="header-bottom">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-sm-2">
-                        <div class="logo">
-                            <h4><a href="index.html">ROOTED FOOT MART</a></h4>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="mainmenu text-center">
-                            <nav>
-                                <ul>
-                                    <li><a href="index.php">Home</a>
-                                    </li>
-                                    <li><a href="location.php">Mart</a>
-                                    </li>
-                                    <li><a href="harvest.php">Harvest</a>
-                                    </li>
-                                    <li><a href="Contact.php">Place Order</a>
-                                    </li>
-                                    <li><a href="graphs.php">Insights</a>
-                                    </li>
-                                    |
-                                    <li><a href="login.php">Sign In</a>
-                                    </li>
-                                    <li><a href="register.php">Sign Up</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!--header-area end-->
-
+<?php
+require("header.php");
+?>
     <div class="page-banner-area bg-1">
         <div class="container">
             <div class="row align-items-center height-400">
